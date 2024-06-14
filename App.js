@@ -1,6 +1,9 @@
+import 'react-native-gesture-handler';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -11,6 +14,7 @@ import EditExpenseScreen from './screens/EditExpenseScreen';
 import Colors from './constants/colors';
 
 export default function App() {
+  const RootStack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
   return (
@@ -28,16 +32,8 @@ export default function App() {
             tabBarStyle: {
               backgroundColor: Colors.primary500,
             },
-            /*  this isn't working
-            tabBarIconStyle: ({ focused }) => {
-
-              console.log('focused', focused);
-              return focused
-                ? { backgroundColor: Colors.neutral100 }
-                : { backgroundColor: Colors.accent400 };
-
-                
-            },*/
+            tabBarActiveTintColor: Colors.accent400,
+            tabBarInactiveTintColor: Colors.neutral500,
           }}
         >
           <Tab.Screen
@@ -64,6 +60,13 @@ export default function App() {
           />
         </Tab.Navigator>
         <StatusBar style='light' />
+        <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+          <RootStack.Screen
+            name='EditExpense'
+            component={EditExpenseScreen}
+            options={{ title: 'Edit Expense' }}
+          />
+        </RootStack.Group>
       </NavigationContainer>
     </>
   );
