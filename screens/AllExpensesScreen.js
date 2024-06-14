@@ -6,7 +6,6 @@ import Colors from '../constants/colors';
 
 import ExpenseCard from '../components/ExpenseCard';
 import SummaryCard from '../components/SummaryCard';
-import NumberCard from '../components/NumberCard';
 
 function AllExpensesScreen({ navigation }) {
   useLayoutEffect(() => {
@@ -30,12 +29,12 @@ function AllExpensesScreen({ navigation }) {
         title='Edit Expenses'
         onPress={() => navigation.navigate('EditExpense', { backTitle: 'All' })}
       />
-      <ExpenseCard title={"hello"} content={"content"}/>
-      <SummaryCard content={"example summary"}/>
-      <NumberCard title={"$45.55"} />
-      <ExpenseCard title={"test"} content={"test"}>
-        <NumberCard title={"$45.55"} />
-      </ExpenseCard>
+      <SummaryCard content={"example summary"} summary={'$456.34'}/>
+      <ExpenseCard title={"hello"} content={"content"} expenseAmount={'45.96'}/>
+      <ExpenseCard title={"hello"} content={"content"} expenseAmount={'45.96'}/>
+      <ExpenseCard title={"hello"} content={"content"} expenseAmount={'45.96'}/>
+      
+    
     </View>
   );
 }
