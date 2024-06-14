@@ -1,16 +1,21 @@
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 import Colors from '../constants/colors';
+import { TextInput } from 'react-native-gesture-handler';
 
 function AddExpenseScreen() {
+
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.text}>Add Expense Screen!</Text>
       <View style={styles.expenseFormContainer}>
         <Text>Expense Form</Text>
         <Text>Enter expense title</Text>
+        <TextInput placeholder='Enter expense title' />
         <Text>Enter expense date</Text>
+        <TextInput placeholder='Enter expense date' />
         <Text>Enter expense amount</Text>
+        <TextInput placeholder='Enter expense amount' />
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.cancelButtonContainer}>
@@ -43,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   buttonsContainer: {
-    flexDirection: 'row',    
+    flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 16,
     width: '50%',
