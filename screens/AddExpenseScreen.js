@@ -2,15 +2,15 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import Colors from '../constants/colors';
 
-function EditExpenseScreen() {
+function AddExpenseScreen() {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Edit Expense Screen!</Text>
+            <Text style={styles.text}>Add Expense Screen!</Text>
         </View>
     );
 }
 
-export default EditExpenseScreen
+export default AddExpenseScreen
 
 const styles = StyleSheet.create({
     container: {
