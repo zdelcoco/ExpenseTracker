@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   expenseText: {
     color: Colors.primary600,
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
     
