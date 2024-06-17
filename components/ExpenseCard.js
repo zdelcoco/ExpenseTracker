@@ -1,10 +1,17 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 import Colors from '../constants/colors';
 
-function ExpenseCard({ title, content, expenseAmount }) {
+function ExpenseCard({ title, content, expenseAmount, onPress }) {
   return (
-    <View style={styles.rootContainer}>
+    <Pressable
+      android_ripple={{ color: Colors.primary500 }}
+      style={({ pressed }) => [
+        styles.rootContainer,
+        pressed ? styles.buttonPressed : null,     
+      ]}
+      onPress={onPress}
+    >
       <View style={styles.textOuterContainer}>
         <View styles={styles.textInnerContainer}>
           <Text style={styles.title}>{title}</Text>
@@ -16,7 +23,7 @@ function ExpenseCard({ title, content, expenseAmount }) {
           <Text style={styles.expenseText}>{expenseAmount}</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.neutral200,
     fontSize: 18,
-    fontWeight: 'bold',   
+    fontWeight: 'bold',
   },
   content: {
     color: Colors.neutral300,
@@ -54,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   expenseOuterContainer: {
-    flex: 1,    
+    flex: 1,
     height: '100%',
   },
   expenseInnerContainer: {
@@ -68,6 +75,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
-    
   },
+  buttonPressed: {
+    backgroundColor: Colors.primary600,
+  }
 });

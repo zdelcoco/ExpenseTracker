@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import Colors from '../constants/colors';
 import { TextInput } from 'react-native-gesture-handler';
 
-function AddExpenseScreen() {
+function AddExpenseScreen({ expenseId }) {
 
   return (
     <View style={styles.rootContainer}>

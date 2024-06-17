@@ -20,6 +20,23 @@ function AllExpensesScreen({ navigation }) {
     currency: 'USD',
   });
 
+  function renderExpenseItem(itemData) {
+    function pressHandler() {
+      navigation.navigate('EditExpense', {
+        expenseId: itemData.item.id
+      });
+    }
+
+    return (
+      <ExpenseCard
+        title={itemData.item.title}
+        content={itemData.item.date}
+        expenseAmount={USDollar.format(itemData.item.amount)}
+        onPress={pressHandler}
+      />
+    );
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -47,13 +64,7 @@ function AllExpensesScreen({ navigation }) {
       />
       <FlatList
         data={EXPENSES.sort((a, b) => b.date.localeCompare(a.date))}
-        renderItem={({ item }) => (
-          <ExpenseCard
-            title={item.title}
-            content={item.date}
-            expenseAmount={USDollar.format(item.amount)}
-          />
-        )}
+        renderItem={renderExpenseItem}
         keyExtractor={(item) => item.id}
         style={styles.expenseList}
         contentContainerStyle={styles.expenseListContainer}
