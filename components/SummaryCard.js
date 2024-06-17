@@ -19,6 +19,7 @@ export default SummaryCard;
 
 const styles = StyleSheet.create({
   rootContainer: {
+    marginTop: 16,
     flexDirection: 'row',
     backgroundColor: Colors.neutral500,
     borderRadius: 6,
@@ -43,11 +44,12 @@ const styles = StyleSheet.create({
   },
   summaryContainer: {
     padding: 8,
-    flex: 1,
+    flex: 2,
   },
   summary: {
     color: Colors.primary600,
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'right',
   },
 });

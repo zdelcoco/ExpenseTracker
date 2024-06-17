@@ -1,14 +1,12 @@
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLayoutEffect } from 'react';
+import { FlatList } from 'react-native-gesture-handler';
+import { EXPENSES } from '../data/dummy-data';
 
 import Colors from '../constants/colors';
-
 import ExpenseCard from '../components/ExpenseCard';
 import SummaryCard from '../components/SummaryCard';
-
-import { EXPENSES } from '../data/dummy-data';
-import { FlatList } from 'react-native-gesture-handler';
 
 function AllExpensesScreen({ navigation }) {
   function totalExpenses() {
@@ -53,11 +51,6 @@ function AllExpensesScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>All Expenses Screen!</Text>
-      <Button
-        title='Edit Expenses'
-        onPress={() => navigation.navigate('EditExpense', { backTitle: 'All' })}
-      />
       <SummaryCard
         content={'Total expenses'}
         summary={USDollar.format(totalExpenses())}
