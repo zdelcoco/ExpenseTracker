@@ -2,15 +2,17 @@ import { View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLayoutEffect } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { EXPENSES } from '../data/dummy-data';
+import { useSelector } from 'react-redux';
 
 import Colors from '../constants/colors';
 import ExpenseCard from '../components/ExpenseCard';
 import SummaryCard from '../components/SummaryCard';
 
 function AllExpensesScreen({ navigation }) {
+  expenses = useSelector((state) => state.expenses.expenses);
+
   function totalExpenses() {
-    return EXPENSES.reduce((acc, expense) => acc + expense.amount, 0);
+    return expenses.reduce((acc, expense) => acc + expense.amount, 0);
   }
 
   const USDollar = new Intl.NumberFormat('en-US', {
@@ -18,10 +20,12 @@ function AllExpensesScreen({ navigation }) {
     currency: 'USD',
   });
 
+  const sortedExpenses = [...expenses].sort((a, b) => b.date.localeCompare(a.date));
+
   function renderExpenseItem(itemData) {
     function pressHandler() {
       navigation.navigate('EditExpense', {
-        expenseId: itemData.item.id
+        expenseId: itemData.item.id,
       });
     }
 
@@ -56,7 +60,7 @@ function AllExpensesScreen({ navigation }) {
         summary={USDollar.format(totalExpenses())}
       />
       <FlatList
-        data={EXPENSES.sort((a, b) => b.date.localeCompare(a.date))}
+        data={sortedExpenses}
         renderItem={renderExpenseItem}
         keyExtractor={(item) => item.id}
         style={styles.expenseList}

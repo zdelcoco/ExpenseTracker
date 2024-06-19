@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { Provider } from 'react-redux';
+import { store } from './store/redux/store';
 
 import AllExpensesScreen from './screens/AllExpensesScreen';
 import RecentExpensesScreen from './screens/RecentExpensesScreen';
@@ -21,6 +23,7 @@ export default function App() {
   function Home() {
     return (
       <Tab.Navigator
+        id={'Home'}
         screenOptions={{
           headerStyle: {
             backgroundColor: Colors.primary500,
@@ -33,7 +36,7 @@ export default function App() {
             backgroundColor: Colors.primary500,
           },
           tabBarActiveTintColor: Colors.accent400,
-          tabBarInactiveTintColor: Colors.neutral500,          
+          tabBarInactiveTintColor: Colors.neutral500,
         }}
       >
         <Tab.Screen
@@ -64,46 +67,48 @@ export default function App() {
 
   return (
     <>
-      <NavigationContainer>
-        <RootStack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: Colors.primary500,
-            },
-            headerTintColor: Colors.neutral200,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        >
-          <RootStack.Screen
-            name='Home'
-            component={Home}
-            options={{ headerShown: false }}
-          />
-          <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-          <RootStack.Screen
-              name='AddExpense'
-              component={AddExpenseScreen}
-              options={{
-                title: 'Add Expense',
-                headerBackTitle: 'Back',
-                //headerBackTitle: ({ params }) => params ? params.backTitle : 'Back',
-              }}
-            />
+      <Provider store={store}>
+        <NavigationContainer>
+          <RootStack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: Colors.primary500,
+              },
+              headerTintColor: Colors.neutral200,
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          >
             <RootStack.Screen
-              name='EditExpense'
-              component={EditExpenseScreen}
-              options={{
-                title: 'Edit Expense',
-                headerBackTitle: 'Back',
-                //headerBackTitle: ({ params }) => params ? params.backTitle : 'Back',
-              }}
+              name='Home'
+              component={Home}
+              options={{ headerShown: false }}
             />
-          </RootStack.Group>
-        </RootStack.Navigator>
-        <StatusBar style='light' />
-      </NavigationContainer>
+            <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+              <RootStack.Screen
+                name='AddExpense'
+                component={AddExpenseScreen}
+                options={{
+                  title: 'Add Expense',
+                  headerBackTitle: 'Back',
+                  //headerBackTitle: ({ params }) => params ? params.backTitle : 'Back',
+                }}
+              />
+              <RootStack.Screen
+                name='EditExpense'
+                component={EditExpenseScreen}
+                options={{
+                  title: 'Edit Expense',
+                  headerBackTitle: 'Back',
+                  //headerBackTitle: ({ params }) => params ? params.backTitle : 'Back',
+                }}
+              />
+            </RootStack.Group>
+          </RootStack.Navigator>
+          <StatusBar style='light' />
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }

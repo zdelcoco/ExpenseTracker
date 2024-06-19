@@ -2,14 +2,16 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLayoutEffect } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { EXPENSES } from '../data/dummy-data';
+import { useSelector } from 'react-redux';
 
 import Colors from '../constants/colors';
 import ExpenseCard from '../components/ExpenseCard';
 import SummaryCard from '../components/SummaryCard';
 
 function RecentExpensesScreen({ navigation }) {
-  const recentExpenses = EXPENSES.filter((expense) => {
+  const expenses = useSelector((state) => state.expenses.expenses);
+
+  const recentExpenses = expenses.filter((expense) => {
     const expenseDate = new Date(expense.date);
     const today = new Date();
     const last7Days = new Date(today.setDate(today.getDate() - 7));
